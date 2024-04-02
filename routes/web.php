@@ -8,7 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('blog',[AdminController::class,'index'])->name('blog');
+Auth::routes();//wtf
+// route ถ้าตั้งชื่อแล้ว ไม่ต้องโยงผ่าน url ใช้ ฟังชั่น route แบบจะโยงให้เอง
+// นั้นแหละความแตกต่าง
+// มันจะมีประโยชน์ตอนเขียนโปรแกรมใหญ่ๆ แล้วเขียนใน view เยอะ เวลา url ชนกัน จะแก้มันต้องแก้ใหม่หมด ถ้าทำแบบนี้ไม่ต้อง
+Route::get('blog',[AdminController::class,'index'])->name('blog');//
 Route::get('about',[AdminController::class,'about'])->name('about');
 route::get('create',[AdminController::class,'create']);
 route::post('insert',[AdminController::class,'insert']);
@@ -16,6 +20,5 @@ route::get('delete/{id}',[AdminController::class,'delete'])->name('delete');
 route::get('change/{id}',[AdminController::class,'change'])->name('change');
 route::get('edit/{id}',[AdminController::class,'edit'])->name('edit');
 route::post('update/{id}',[AdminController::class,'update'])->name('update');
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

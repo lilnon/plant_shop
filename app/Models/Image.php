@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
+
+    //เพิ่มให้หมดที่มึงใช้
 }

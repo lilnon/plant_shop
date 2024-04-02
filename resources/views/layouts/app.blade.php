@@ -31,7 +31,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <a class="nav-link active" aria-current="page" href="{{route('about')}}">about</a>
+                        <a class="nav-link active" aria-current="page" href="/blog">blog</a>
+                        <a class="nav-link active" aria-current="page" href="/create">create</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,10 +52,12 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Hi Username : {{ Auth::user()->name }}
                                 </a>
+
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/create">
                                         create
