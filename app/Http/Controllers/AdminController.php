@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 
 use App\Models\Blog;
 
-    try {
-        DB::statement('call reset_auto_increment()');
-        $sucess = "successfully reset auto increment isWORKING!!!";
-    } catch (\Exception $e) {
-        $error = "Error: " . $e->getMessage();
-    }
+
+try {
+    DB::statement('CALL reset_auto_increment()');
+    $success = "Successfully reset auto increment is WORKING!!!";
+} catch (\Exception $e) {
+    $error = "Error: " . $e->getMessage();
+}
 
 // การเข้าถึง db ของ laravel มีสองแบบ คือ DB แบบโง่ๆ ที่มึงธรรมทำ
 // กับ eloquent https://laravel.com/docs/11.x/eloquent
@@ -22,10 +23,34 @@ use App\Models\Blog;
 class AdminController extends Controller
 {
 
+    // ก็คืออันนี้
     function index()
     {
+
+        /* เข้าใจยัง เข้าใจ เค */
+        /* มึงใช้ function index ของ admin controller เพื่อเรียกใช้หน้า blog */
         $blogs = DB::table('blogs')->paginate(5);
-        return view('blog', compact('blogs'));
+        //$test = "ทดสอบส่งตัวแปรไป2";
+
+        // อันนี้ ฟังชั่น compact เป็นการส่งค่าอีกแบบนึง
+        //return view('blog', compact('blogs'));
+        // ถ้า compact มันจะใช้ชื่อ blogs แล้วก็อ้างอิงตัวแปร $blogs ให้เลย และมันจะส่งไปแบบที่กูเขียนให้ดู เหมือนเป็นฟังชั่นช่วยทำ
+        //return view('blog', compact('blogs',));
+        //เขียนแบบนี้ก็ได้ จะดูง่ายกว่า
+        return view('blog', [
+            'blogs' => $blogs,
+
+            // 'test' => "ทดสอบส่งตัวแปรไป2"
+        ]);
+    }
+    function main()
+    {
+
+        $main = DB::table('blogs')->paginate(8);
+        return view('welcome', ['main' => $main
+
+    ]);
+
     }
 
     function about()
@@ -40,72 +65,108 @@ class AdminController extends Controller
     }
 
 
-public function insert(Request $request)
-{
-    $request->validate([
-        'title' => 'required|max:50',
-        'content' => 'required',
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image file
-    ]);
+    function insert(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:50',
+            'content' => 'required',
+            'category' => 'required|max:50',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validate the image file
+            'price' => 'numeric', // Validate the price field as numeric
 
-    $data = [
-        'title' => $request->title,
-        'content' => $request->content,
-    ];
+        ]);
 
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imageName); // Move the uploaded image to the 'images' folder in the public directory
-        $data['image'] = $imageName; // Save the image file name to the database
-    }else{
-        $data['image'] = null;
-    }
-
-    Blog::Create([
-        'title' => $data['title'],
-        'content' => $data['content'],
-        'image' => $data['image'],
-    ]);
-
-    return redirect('/blog');
-}
-
-    function delete($id){ // ทำไมไม่ใช้ eloquant
-        DB::table('blogs')->where('id',$id)->delete();
-        return redirect('/blog');
-    }
-    function change($id){
-        $blog=DB::table('blogs')->where('id',$id)->first();
-        $data=[
-            'status'=>!$blog->status
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'price' => $request->price,
+            'image' => $request->image,
+            'category' => $request->category
         ];
-       $blog= DB::table('blogs')->where('id',$id)->update($data);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['image'] = $imageName;
+        } else {
+            $data['image'] = null;
+        }
+
+        Blog::create($data);
+
         return redirect('/blog');
     }
-    function edit($id){
-        $blog=DB::table('blogs')->where('id',$id)->first();
-        return view('edit',compact('blog'));
+
+
+    function delete($id)
+    { // ทำไมไม่ใช้ eloquant
+        DB::table('blogs')->where('id', $id)->delete();
+        return redirect('/blog');
     }
-    function update(Request $request,$id)
+    function change($id)
+    {
+        $blog = DB::table('blogs')->where('id', $id)->first();
+        $data = [
+            'status' => !$blog->status
+        ];
+        $blog = DB::table('blogs')->where('id', $id)->update($data);
+        return redirect('/blog');
+    }
+    function edit($id)
+    {
+        $blog = DB::table('blogs')->where('id', $id)->first();
+        return view('edit', compact('blog'));
+    }
+    function update(Request $request, $id)
     {
         $request->validate(
             [
                 'title' => 'required|max:50',
-                'content' => 'required'
+                'content' => 'required',
+                'price' => 'required',
+                'category' => 'required',
             ],
             [
                 'title.required' => 'กรุณากรอกชื่อบทความ',
                 'title.max' => 'กรุณากรอกชื่อบทความไม่เกิน 50 ตัวอักษร',
-                'content.required' => 'กรุณากรอกเนื้อหาบทความ'
+                'content.required' => 'กรุณากรอกเนื้อหาบทความ',
+                'price.required' => 'กรุณากรอกราคาสินค้า   ',
+                'category.required' => 'กรุณากรอกหมวดหมู่สินค้า   ',
             ]
-            );
-        $data =[
-            'title' =>$request ->title,
-            'content' =>$request ->content
+        );
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'price' => $request->price,
+            'image' => $request->image,
+            'category' => $request->category
         ];
-        DB::table('blogs')->where('id',$id)->update($data);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['image'] = $imageName;
+        } else {
+            $data['image'] = null;
+        }
+        DB::table('blogs')->where('id', $id)->update($data);
         return redirect('/blog');
+    }
 
+    function getCategories()
+    {
+
+        $getcategory = DB::table('blogs')->paginate(8);
+        return view('layouts.app', ['getcategory' => $getcategory
+
+    ]);
+
+
+    }
+
+    function iphonex()
+    {
+        return view('iphonex');
     }
 }

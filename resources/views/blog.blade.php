@@ -3,29 +3,37 @@
 @section('content')
     @if (count($blogs) > 0)
         <h2 class="text text-center py-2">All product</h2>
+        {{-- <h1>ตัวแปรที่ส่งมา {{$test}}</h1> --}}
         <table class="table table-bordered text-center">
             <thead>
                 <tr>
                     <th scope="col">Number</th>
                     <th scope="col">Product title</th>
                     <th scope="col">Img</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Edit product </th>
-                    <th scope="col">Delete product</th>
+                    <th scope="col">Delete product </th>
+
                 </tr>
             </thead>
             <tbody>
+
                 @foreach ($blogs as $item)
                     <tr>
+
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
                         <td>
                             @if ($item->image)
-                                <img width="64" height="64" src="{{ asset('images/' . $item->image) }}" alt="image">
+                                <img width="100" height="50" src="{{ asset('images/' . $item->image) }}" alt="image">
+                                <img src="{{$item->image}}" alt="">
                             @else
                                 No Image
                             @endif
                         </td>
+
+                        <td>{{$item->price}}</td>
 
                         <td>
                             @if ($item->status == true)

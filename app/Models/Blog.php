@@ -17,7 +17,9 @@ class Blog extends Model
         'title',
         'content',
         'price',
-        'status',
-        'image'
+        'image',
+        'category',
+        'status'
+
     ];
 }

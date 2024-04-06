@@ -1,0 +1,6 @@
+    github update
+
+git add .
+git commit -m "commit message here" Enter
+git push origin main
+
