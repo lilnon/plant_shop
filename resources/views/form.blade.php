@@ -61,13 +61,29 @@
 
 
         <div class="mb-3">
-            <label > upload image</label>
-            <input type="file" name="image" class="form-control">
+            <label id="imageLabel" style="display: none;">Current Image</label><br>
+            <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 200px; display: none; margin-top: 20px;">
+            <hr>
+            <label>Upload Image</label>
+            <input type="file" name="image" id="image" class="form-control" onchange="previewImage();">
         </div>
 
-
-
         <input type="submit" value="Save" class="btn btn-primary my-3">
-        <a href="{{route('blog')}}" class="btn btn-success">All products</a>
+        <a href="{{ route('blog') }}" class="btn btn-success">All Products</a>
     </form>
+
+
+    <script>
+        function previewImage() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var preview = document.getElementById('imagePreview');
+                var label = document.getElementById('imageLabel');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                label.style.display = 'inline';
+            }
+            reader.readAsDataURL(document.getElementById('image').files[0]);
+        }
+    </script>
 @endsection

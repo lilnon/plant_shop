@@ -48,35 +48,38 @@
 
 
         @if ($blog->image)
-    <div class="form-group">
-        <label for="current_image">Current Image</label><br>
-        <img id="current_image" src="{{ asset('images/' . $blog->image) }}" alt="Current Image" style="max-width: 200px;">
-    </div>
-@endif
-
-            <hr>
-
             <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" name="image" class="form-control" onchange="previewImage(event)">
+                <label for="current_image">Current Image</label><br>
+                <img id="current_image" src="{{ asset('images/' . $blog->image) }}" alt="Current Image"
+                    style="max-width: 200px;">
             </div>
-            @error('image')
-                <div class="my-2">
-                    <span class="text-danger">{{ $message }}</span>
-                </div>
-            @enderror
+        @endif
+
+        <hr>
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" name="image" class="form-control" onchange="previewImage(event)">
+        </div>
+        @error('image')
+            <div class="my-2">
+                <span class="text-danger">{{ $message }}</span>
+            </div>
+        @enderror
 
         <input type="submit" value="Save" class="btn btn-primary my-3">
         <a href="{{ route('blog') }}" class="btn btn-success">All Products</a>
     </form>
-@endsection
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-            var output = document.getElementById('current_image');
-            output.src = reader.result;
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('current_image');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
         };
-        reader.readAsDataURL(event.target.files[0]);
-    };
-</script>
+    </script>
+@endsection
+

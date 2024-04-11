@@ -63,29 +63,33 @@
     @else
         <h2 class="text text-center py-2">no product in database</h2>
     @endif
+
+    <script>
+        function confirmDelete(event, title) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "to delete '" + title + "' ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = event.target.href;
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        title: "Cancelled",
+                        text: "'" + title + "  ' has not been deleted :)",
+                        showConfirmButton: false,
+                        icon: "error",
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    </script>
 @endsection
 
-<script>
-    function confirmDelete(event, title) {
-        event.preventDefault();
-        Swal.fire({
-            title: "Are you sure?",
-            text: "to delete '" + title + "' ?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = event.target.href;
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    title: "Cancelled",
-                    text: "'" + title + "  ' has not been deleted :)",
-                    icon: "error"
-                });
-            }
-        });
-    }
-</script>
+

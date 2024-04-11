@@ -46,4 +46,4 @@ Route::get('iphonex',[AdminController::class,'iphonex'])->name('iphonex');
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'main2'])->name('home');
