@@ -53,6 +53,8 @@
                 <img id="current_image" src="{{ asset('images/' . $blog->image) }}" alt="Current Image"
                     style="max-width: 200px;">
             </div>
+            @else
+                <p>no img yet</p>
         @endif
 
         <hr>
