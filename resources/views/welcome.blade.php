@@ -41,9 +41,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->id }} | {{ $item->title }}</h5>
                         <p class="card-text">
-                            @if (strlen($item->content) > 100)
-                                {{ substr($item->content, 0, 100) }}<span class="more-text"
-                                    style="display:none;">{{ substr($item->content, 100) }}</span>
+                            @if (strlen($item->content) > 500)
+                                {{ substr($item->content, 0, 500) }}<span class="more-text"
+                                    style="display:none;">{{ substr($item->content, 500) }}</span>
                                 <a href="#" class="show-more">Show more</a>
                             @else
                                 {{ $item->content }}

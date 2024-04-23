@@ -13,6 +13,7 @@
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Edit product </th>
+                    <th scope="col">Report PDF </th>
                     <th scope="col">Delete product </th>
 
                 </tr>
@@ -48,6 +49,9 @@
                         </td>
                         <td>
                             <a href="{{ route('edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('report', $item->id) }}" class="btn btn-info" target="_blank">pdf</a>
                         </td>
                         <td>
                             <a href="{{ route('delete', $item->id) }}" class="btn btn-danger"

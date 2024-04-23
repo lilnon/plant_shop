@@ -31,6 +31,7 @@ route::get('delete/{id}',[ProductsController::class,'delete'])->name('delete');
 route::get('change/{id}',[ProductsController::class,'change'])->name('change');
 route::get('edit/{id}',[ProductsController::class,'edit'])->name('edit');
 route::post('update/{id}',[ProductsController::class,'update'])->name('update');
+route::get('report/{id}', [ProductsController::class,'report'])->name('report');
 
 Route::get('/',[AdminController::class,'getCategories']);
 
@@ -38,5 +39,9 @@ Route::get('/',[AdminController::class,'getCategories']);
 // Route::get('/category', [CategoryController::class, 'index']);
 Route::name('category.')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('index');
+    Route::get('/category', [CategoryController::class, 'main']);
+
 });
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'main2'])->name('home');
