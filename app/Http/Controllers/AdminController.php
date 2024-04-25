@@ -52,13 +52,13 @@ class AdminController extends Controller
         return view('about', compact('name', 'date'));
     }
 
-    function getCategories()
-    {
+    // function getCategories()
+    // {
 
-        $getcategory = DB::table('blogs')->paginate(8);
-        return view('layouts.app', ['getcategory' => $getcategory
+    //     $getcategory = DB::table('blogs')->paginate(8);
+    //     return view('layouts.app', ['getcategory' => $getcategory
 
-    ]);
+    // ]);
 
 
     }
