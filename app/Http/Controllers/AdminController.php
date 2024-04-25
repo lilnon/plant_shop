@@ -61,7 +61,7 @@ class AdminController extends Controller
     // ]);
 
 
-    }
+    // }
 
     function iphonex()
     {
