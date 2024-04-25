@@ -43,5 +43,7 @@ Route::name('category.')->group(function () {
 
 });
 
-
+Route::get('/info',function(){
+    return phpinfo();
+} );
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'main2'])->name('home');
