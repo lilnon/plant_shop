@@ -33,7 +33,7 @@ route::get('edit/{id}',[ProductsController::class,'edit'])->name('edit');
 route::post('update/{id}',[ProductsController::class,'update'])->name('update');
 route::get('report/{id}', [ProductsController::class,'report'])->name('report');
 
-Route::get('/',[AdminController::class,'getCategories']);
+// Route::get('/',[AdminController::class,'getCategories']);
 
 // Route::resource('/category', CategoryController::class);
 // Route::get('/category', [CategoryController::class, 'index']);
