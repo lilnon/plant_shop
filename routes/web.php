@@ -36,12 +36,12 @@ route::get('report/{id}', [ProductsController::class,'report'])->name('report');
 // Route::get('/',[AdminController::class,'getCategories']);
 
 // Route::resource('/category', CategoryController::class);
-// Route::get('/category', [CategoryController::class, 'index']);
-Route::name('category.')->group(function () {
-    Route::get('/category', [CategoryController::class, 'index'])->name('index');
-    Route::get('/category', [CategoryController::class, 'main']);
+// // Route::get('/category', [CategoryController::class, 'index']);
+// Route::name('category.')->group(function () {
+//     Route::get('/category', [CategoryController::class, 'index'])->name('index');
+//     Route::get('/category', [CategoryController::class, 'main']);
 
-});
+// });
 
 Route::get('/info',function(){
     return phpinfo();

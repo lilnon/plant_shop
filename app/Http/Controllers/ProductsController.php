@@ -20,7 +20,8 @@ class ProductsController extends Controller
     public function index()
     {
 
-        $blogs = DB::table('blogs')->paginate(5);
+        // $blogs = DB::table('blogs')->paginate(5);
+        $blogs = Blog::paginate(5);
         return view('product/blog', [
             'blogs' => $blogs,
         ]);
@@ -28,7 +29,7 @@ class ProductsController extends Controller
     function main()
     {
 
-        $main = DB::table('blogs')->paginate(8);
+        $main = Blog::paginate(8);
         return view('welcome', [
             'main' => $main
 
@@ -76,7 +77,7 @@ class ProductsController extends Controller
 
     function delete($id)
     { // ทำไมไม่ใช้ eloquant
-        DB::table('blogs')->where('id', $id)->delete();
+        Blog::where('id', $id)->delete();
         return redirect('/blog');
     }
     function change($id)
@@ -125,13 +126,13 @@ class ProductsController extends Controller
         } else {
             $data['image'] = null;
         }
-        DB::table('blogs')->where('id', $id)->update($data);
+        Blog::where('id', $id)->update($data);
         return redirect('/blog');
     }
     public function report($id)
     {
 
-        $blog = DB::table('blogs')->where('id', $id)->first();
+        $blog = Blog::where('id', $id)->first();
         // return $blog;
 
         /** create new PDF document */
