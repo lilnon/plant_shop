@@ -9,6 +9,7 @@
                 <tr>
                     <th scope="col">Number</th>
                     <th scope="col">Product title</th>
+                    <th scope="col">Product discription</th>
                     <th scope="col">Img</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
@@ -25,6 +26,7 @@
 
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
+                        <td>{{ $item->content }}</td>
                         <td>
                             @if ($item->image)
                                 <img width="100" height="50" src="{{ asset('images/' . $item->image) }}" alt="image">
