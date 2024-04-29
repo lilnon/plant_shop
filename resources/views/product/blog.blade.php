@@ -1,3 +1,16 @@
+<!-- resources/views/product/blog.blade.php -->
+
+{{-- @extends('layouts.app')
+
+@section('title', 'Products')
+
+@section('content')
+    <div id="products-data-grid" data-products="{{ json_encode($blogs) }}"></div>
+
+    <!-- Include compiled JavaScript file -->
+    <script src="{{ mix('js/app.js') }}"></script>
+@endsection --}}
+
 @extends('layouts.app')
 @section('title', 'Products')
 @section('content')
