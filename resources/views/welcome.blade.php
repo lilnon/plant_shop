@@ -1,3 +1,5 @@
+{{-- /* This code snippet is a Blade template in a Laravel application. Let me explain what each part of the
+code does: */ --}}
 @extends('layouts.app')
 @section('title', 'index')
 
@@ -22,6 +24,8 @@
         }
     </style>
 
+    {{-- /* This code snippet is responsible for displaying a list of items in a card layout. Let me break
+   down what each part of the code does: */ --}}
     <div class="row container mx-auto py-2">
         @foreach ($main as $item)
             @if ($item->status)
@@ -40,7 +44,10 @@
                         </div>
 
                         <div class="card-footer bg-transparent border-0">
-                            <a href="#" class="btn btn-primary show-detail" data-id="{{ $item->id }}" data-title="{{ $item->title }}" data-content="{{ $item->content }}" data-price="{{ $item->price }}" data-image="{{ asset('images/' . $item->image) }}">Show Detail</a>
+                            <a href="#" class="btn btn-primary show-detail" data-id="{{ $item->id }}"
+                                data-title="{{ $item->title }}" data-content="{{ $item->content }}"
+                                data-price="{{ $item->price }}" data-image="{{ asset('images/' . $item->image) }}">Show
+                                Detail</a>
                             @if ($item->status)
                                 <a class="btn btn-success">Verified</a>
                             @else
@@ -54,6 +61,8 @@
     </div>
     {{ $main->links() }}
 
+    {{-- /* The script you provided is responsible for handling the click event on elements with the class
+  'show-detail'. Let me break down what each part of the script is doing: */ --}}
     <script>
         document.querySelectorAll('.show-detail').forEach(function(btn) {
             btn.addEventListener('click', function(event) {
@@ -66,7 +75,8 @@
                 const image = this.getAttribute('data-image');
                 Swal.fire({
                     title: title + ' - ' + id,
-                    html: '<img src="' + image + '" style="max-width: 100%;"><br><b>Detail</b> '  + "<br>" + content + '<br><b>Price:</b> ' + price + ' baht/kk',
+                    html: '<img src="' + image + '" style="max-width: 100%;"><br><b>Detail</b> ' +
+                        "<br>" + content + '<br><b>Price:</b> ' + price + ' baht/kk',
                     confirmButtonText: 'Close'
                 });
             });

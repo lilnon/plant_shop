@@ -1,3 +1,7 @@
+{{-- /* The `@extends('layouts.app')` directive in the PHP Blade template language is used to specify that
+the current view file extends a layout file named 'app.blade.php'. This means that the content of
+the current view will be inserted into the layout file at a predefined section. */ --}}
+
 @extends('layouts.app')
 
 

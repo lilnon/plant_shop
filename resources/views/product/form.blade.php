@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'create')
 @section('content')
+    {{-- /* This code snippet is a form for adding a new product. Here's a breakdown of what each part does: */ --}}
     <h2 class="text text-center py-2">Add new product</h2>
     <form method="POST" action="/insert" enctype="multipart/form-data">
         @csrf

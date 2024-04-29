@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Edit Product')
 @section('content')
+    {{-- /* This code snippet is a Blade template used in a Laravel application to edit a product. Here's a
+    breakdown of what it does: */ --}}
     <h2 class="text-center py-2">Edit Product</h2>
     <form method="POST" action="{{ route('update', $blog->id) }}" enctype="multipart/form-data">
         @csrf
-
-
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" class="form-control" value="{{ $blog->title }}">

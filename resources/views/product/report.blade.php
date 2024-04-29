@@ -1,3 +1,5 @@
+{{-- /* The provided code snippet is written in PHP and it serves the purpose of generating a document for a
+Plant Shop product description. Here is a breakdown of what the code does: */ --}}
 
 <?php
 date_default_timezone_set('UTC');
